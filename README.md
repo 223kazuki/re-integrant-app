@@ -2,11 +2,9 @@
 
 An SPA using [re-frame](https://github.com/Day8/re-frame) and [integrant](https://github.com/weavejester/integrant).
 
-## Development
+## Development Mode:
 
-### Development Mode
-
-#### Start Cider from Emacs:
+### Start Cider from Emacs:
 
 Put this in your Emacs config file:
 
@@ -19,7 +17,7 @@ Put this in your Emacs config file:
 
 Navigate to a clojurescript file and start a figwheel REPL with `cider-jack-in-clojurescript` or (`C-c M-J`)
 
-#### Run application:
+### Run application:
 
 ```
 lein dev
@@ -28,10 +26,7 @@ lein dev
 Figwheel will automatically push cljs changes to the browser.  
 Wait a bit, then browse to [http://localhost:3449](http://localhost:3449).
 
-You need [MetaMask](https://metamask.io/) to connect ethereum private network.  
-Install it and connect to http://localhost:8545 hosted by ganache-cli.
-
-#### Run tests:
+### Run tests:
 
 ```
 lein clean
@@ -40,7 +35,7 @@ lein doo phantom test once
 
 The above command assumes that you have [phantomjs](https://www.npmjs.com/package/phantomjs) installed. However, please note that [doo](https://github.com/bensu/doo) can be configured to run cljs.test in many other JS environments (chrome, ie, safari, opera, slimer, node, rhino, or nashorn).
 
-### Production Build
+## Production Build:
 
 ```
 lein do clean, build
