@@ -1,0 +1,76 @@
+.pageChange-enter {
+  opacity: 0.01;
+}
+
+.pageChange-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.pageChange-exit {
+  opacity: 1;
+}
+
+.pageChange-exit-active {
+  opacity: 0.01;
+  transition: opacity 1ms ease-in;
+}
+
+.ui.container.mainContainer > div > div {
+    position: absolute!important;
+}
+
+@media only screen and (max-width: 767px) {
+    .ui.container.mainContainer {
+        width: 100%;
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .ui.container.mainContainer > div {
+        margin-top: -40px;
+    }
+    .ui.container.mainContainer > div > div {
+        width: 94%;
+        margin-left: 3%!important;
+        margin-right: 3%!important;
+    }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    .ui.container.mainContainer {
+        width: 100%;
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .ui.container.mainContainer > div > div {
+        width: 723px;
+        left: 50%;
+        margin-left: -361px;
+    }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px) {
+    .ui.container.mainContainer {
+        width: 100%;
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .ui.container.mainContainer > div > div {
+        width: 933px;
+        left: 50%;
+        margin-left: -466px;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .ui.container.mainContainer {
+        width: 100%;
+        margin-left: 0!important;
+        margin-right: 0!important;
+    }
+    .ui.container.mainContainer > div > div {
+        width: 1127px;
+        left: 50%;
+        margin-left: -563px;
+    }
+}

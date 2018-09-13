@@ -1,0 +1,10 @@
+{:re-integrant-app.module/moment {}
+
+ :re-integrant-app.module/router
+ ["/" {""       :home
+       "about"  :about}]
+
+ :re-integrant-app.module/app
+ {:mount-point-id "app"
+  :routes #ig/ref :re-integrant-app.module/router
+  :moment #ig/ref :re-integrant-app.module/moment}}
