@@ -9,6 +9,3 @@
                                  slurp
                                  (json/read-str :key-fn keyword))}}
            (slurp (io/resource resource)))))
-
-(defmulti reg-sub identity)
-(defmulti reg-event identity)

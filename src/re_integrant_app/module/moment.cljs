@@ -2,7 +2,6 @@
   (:require [integrant.core :as ig]
             [re-frame.core :as re-frame]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
-            [re-integrant-app.utils :refer [reg-sub reg-event]]
             [cljsjs.moment]
             [clojure.core.async :refer [chan go go-loop >! <! timeout close!]]))
 
@@ -10,10 +9,12 @@
 (def initial-db {::now nil})
 
 ;; Subscriptions
+(defmulti reg-sub identity)
 (defmethod reg-sub ::now [k]
   (re-frame/reg-sub k #(::now %)))
 
 ;; Events
+(defmulti reg-event identity)
 (defmethod reg-event ::init [k]
   (re-frame/reg-event-db
    k [re-frame/trim-v]
@@ -41,8 +42,8 @@
 (defmethod ig/init-key :re-integrant-app.module/moment
   [k _]
   (js/console.log (str "Initializing " k))
-  (let [subs [::now]
-        events [::init ::halt ::update-now]
+  (let [subs (->> reg-sub methods (map key))
+        events (->> reg-event methods (map key))
         timing (chan)
         kick #(go
                 (<! (timeout 1000))

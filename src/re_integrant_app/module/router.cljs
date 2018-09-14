@@ -2,7 +2,6 @@
   (:require [integrant.core :as ig]
             [re-frame.core :as re-frame]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
-            [re-integrant-app.utils :refer [reg-sub reg-event]]
             [bidi.bidi :as bidi]
             [pushy.core :as pushy]))
 
@@ -29,12 +28,14 @@
 (def initial-db {::active-panel :none ::router nil})
 
 ;; Subscriptions
+(defmulti reg-sub identity)
 (defmethod reg-sub ::active-panel [k]
   (re-frame/reg-sub k #(::active-panel %)))
 (defmethod reg-sub ::route-params [k]
   (re-frame/reg-sub k #(::route-params %)))
 
 ;; Events
+(defmulti reg-event identity)
 (defmethod reg-event ::init [k]
   (re-frame/reg-event-db
    k [re-frame/trim-v]
@@ -69,8 +70,8 @@
 (defmethod ig/init-key :re-integrant-app.module/router
   [k routes]
   (js/console.log (str "Initializing " k))
-  (let [subs [::active-panel ::route-params]
-        events [::init ::halt ::go-to-page ::set-active-panel]
+  (let [subs (->> reg-sub methods (map key))
+        events (->> reg-event methods (map key))
         router (setup-router routes)]
     (->> subs (map reg-sub) doall)
     (->> events (map reg-event) doall)

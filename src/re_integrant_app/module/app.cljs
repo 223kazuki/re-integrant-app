@@ -3,17 +3,18 @@
             [reagent.core :as reagent]
             [re-frame.core :as re-frame]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
-            [re-integrant-app.utils :refer [reg-sub reg-event]]
             [re-integrant-app.views :as views]))
 
 ;; Initial DB
 (def initial-db {::title nil})
 
 ;; Subscriptions
+(defmulti reg-sub identity)
 (defmethod reg-sub ::title [k]
   (re-frame/reg-sub k #(::title %)))
 
 ;; Events
+(defmulti reg-event identity)
 (defmethod reg-event ::init [k]
   (re-frame/reg-event-db
    k [re-frame/trim-v]
@@ -39,8 +40,8 @@
 (defmethod ig/init-key :re-integrant-app.module/app
   [k {:keys [:mount-point-id]}]
   (js/console.log (str "Initializing " k))
-  (let [subs [::title]
-        events [::init ::halt ::set-title]
+  (let [subs (->> reg-sub methods (map key))
+        events (->> reg-event methods (map key))
         container (.getElementById js/document mount-point-id)]
     (->> subs (map reg-sub) doall)
     (->> events (map reg-event) doall)
