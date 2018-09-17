@@ -10,16 +10,14 @@
 (defn home-panel []
   (let [now (re-frame/subscribe [::moment/now])]
     (fn []
-      (re-frame/dispatch [:re-integrant-app.module.app/set-title "Home"])
       [:div
        [sa/Segment
-        (when @now
-          (str @now))]])))
+        [:h2 "Now"]
+        (when-let [now @now]
+          (str now))]])))
 
 (defn about-panel []
-  (fn []
-    (re-frame/dispatch [:re-integrant-app.module.app/set-title "About"])
-    [:div "About"]))
+  (fn [] [:div "About"]))
 
 (defn none-panel []
   [:div])

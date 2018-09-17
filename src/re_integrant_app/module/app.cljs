@@ -3,6 +3,7 @@
             [reagent.core :as reagent]
             [re-frame.core :as re-frame]
             [day8.re-frame.tracing :refer-macros [fn-traced]]
+            [re-integrant-app.module.router :as router]
             [re-integrant-app.views :as views]))
 
 ;; Initial DB
@@ -11,7 +12,11 @@
 ;; Subscriptions
 (defmulti reg-sub identity)
 (defmethod reg-sub ::title [k]
-  (re-frame/reg-sub k #(::title %)))
+  (re-frame/reg-sub
+   k #(case (::router/active-panel %)
+        :home-panel "Home"
+        :about-panel "About"
+        "")))
 
 ;; Events
 (defmulti reg-event identity)

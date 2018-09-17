@@ -6,11 +6,14 @@
                  [reagent "0.8.0"]
                  [re-frame "0.10.5"]
                  [integrant "0.6.3"]
+                 [org.clojure/data.json "0.2.6"]
+                 ;; View
                  [cljsjs/react-transition-group "2.3.0-0"]
                  [soda-ash "0.78.2" :exclusions [[cljsjs/react]]]
+                 ;; Router
                  [kibu/pushy "0.3.8"]
                  [bidi "2.1.3"]
-                 [org.clojure/data.json "0.2.6"]
+                 ;; Timestamp
                  [cljsjs/moment "2.22.0-0"]]
   :plugins [[lein-cljsbuild "1.1.7"]]
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"
