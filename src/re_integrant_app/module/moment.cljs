@@ -26,7 +26,7 @@
 (defmethod reg-sub ::now [k]
   (re-frame/reg-sub-raw
    k (fn [app-db _]
-       (let [close (create-loop #(re-frame/dispatch [::update-now]) 1000)]
+       (let [close (create-loop #(re-frame/dispatch [::fetch-now]) 1000)]
          (reagent.ratom/make-reaction
           #(get-in @app-db [::now])
           :on-dispose close)))))
@@ -49,17 +49,19 @@
     (->> db
          (filter #(not= (namespace (key %)) (namespace ::x)))
          (into {})))))
-(defmethod reg-event ::update-now [k]
+(defmethod reg-event ::fetch-now [k]
   (re-frame/reg-event-db
    k [re-frame/trim-v]
    (fn-traced
     [db _]
+    (js/console.log "tick!")
     (assoc db ::now (js/moment)))))
 
 ;; Init
 (defmethod ig/init-key :re-integrant-app.module/moment
-  [k _]
+  [k {:keys [:dev]}]
   (js/console.log (str "Initializing " k))
+  (when dev (js/console.log "It's dev mode."))
   (let [subs (->> reg-sub methods (map key))
         events (->> reg-event methods (map key))]
     (->> subs (map reg-sub) doall)

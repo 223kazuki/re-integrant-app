@@ -3,6 +3,7 @@
   :min-lein-version "2.5.3"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
+                 [org.clojure/core.async "0.4.474"]
                  [reagent "0.8.0"]
                  [re-frame "0.10.5"]
                  [integrant "0.6.3"]

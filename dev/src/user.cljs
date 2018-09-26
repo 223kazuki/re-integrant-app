@@ -12,6 +12,3 @@
 (defn reset []
   (stop)
   (start))
-
-(defn ^:export init []
-  (start))
