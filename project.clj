@@ -6,7 +6,7 @@
                  [org.clojure/core.async "0.4.474"]
                  [reagent "0.8.0"]
                  [re-frame "0.10.5"]
-                 [integrant "0.6.3"]
+                 [integrant "0.7.0"]
                  [org.clojure/data.json "0.2.6"]
                  ;; View
                  [cljsjs/react-transition-group "2.3.0-0"]
