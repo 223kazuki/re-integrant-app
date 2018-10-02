@@ -1,6 +1,6 @@
 # re-integrant-app
 
-An SPA using [re-frame](https://github.com/Day8/re-frame) and [integrant](https://github.com/weavejester/integrant).
+SPA using [re-frame](https://github.com/Day8/re-frame) and [integrant](https://github.com/weavejester/integrant).
 
 ## Development Mode:
 
